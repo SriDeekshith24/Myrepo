@@ -1,202 +1,162 @@
-# # 📘 CertifyMe — Full Stack Intern Assessment 🚀
+# CertifyMe — Full Stack Intern Assessment
 
-Welcome to **CertifyMe**, the ultimate Qatar Foundation Admin Portal! This is a **full-stack web application** designed for managing opportunities and user authentication like a boss. Built with cutting-edge technologies, it's ready to handle admin tasks with style, security, and scalability. Whether you're signing up admins, logging in, or CRUD-ing opportunities, this portal has got you covered! 💪
+## Overview
 
-## 🔥 What Makes This Project Insane?
+CertifyMe is a full-stack web application for the Qatar Foundation Admin Portal. It provides a secure backend API for user authentication and opportunity management, integrated with an existing frontend interface. The project demonstrates modern web development practices with Flask, SQLAlchemy, JWT authentication, and a responsive HTML/CSS/JS frontend.
 
-- **Backend Powerhouse**: A robust Flask API with JWT authentication, password hashing, secure token resets, and full CRUD operations for opportunities. No more boring backends—this one is secure, scalable, and database-driven!
-- **Frontend Magic**: A sleek HTML/CSS/JS interface for admins to manage everything without breaking a sweat. (And yes, we kept the UI unchanged as requested—pure genius!)
-- **Database Wizardry**: SQLite for development (easily switchable to PostgreSQL/MySQL), with SQLAlchemy ORM for smooth data handling.
-- **Security First**: Bcrypt for passwords, JWT for sessions, and secure reset tokens. Your data is locked down tighter than Fort Knox! 🔒
-- **Production-Ready**: CORS enabled, environment variables, and modular code structure. Deploy this beast anywhere!
+## Features
 
-## 🛠 Tech Stack (The Dream Team)
+### Backend
+- **User Authentication**: Secure signup, login, password reset with JWT tokens
+- **Opportunity Management**: Full CRUD operations for opportunities with user-specific access
+- **Database Integration**: SQLite with SQLAlchemy ORM (easily configurable for PostgreSQL/MySQL)
+- **Security**: Password hashing with Bcrypt, secure token generation, CORS support
+- **API Design**: RESTful endpoints with proper validation and error handling
 
-### Backend (Flask Fury)
-- **Flask** 3.0.2: The web framework that makes APIs dance!
-- **Flask-SQLAlchemy** 3.1.1: ORM for database operations—queries like a pro.
-- **Flask-JWT-Extended** 4.6.0: JWT tokens for secure authentication.
-- **Flask-Bcrypt** 1.0.1: Password hashing that laughs at brute-force attacks.
-- **Flask-CORS** 4.0.0: Cross-origin requests handled effortlessly.
-- **Python-Dotenv** 1.0.1: Environment secrets management.
-- **ItsDangerous** 2.2.0: Secure token generation for password resets.
+### Frontend
+- Admin dashboard for opportunity management
+- User authentication forms (signup, login, forgot password)
+- Dynamic opportunity cards with create, edit, and delete functionality
+- API integration with JWT token management
 
-### Frontend (UI Supremacy)
-- **HTML5**: Semantic markup for the win.
-- **CSS3**: Stylish designs that pop!
-- **JavaScript (ES6+)**: Dynamic interactions without the drama.
+## Tech Stack
+
+### Backend
+- **Flask** 3.0.2 - Web framework
+- **Flask-SQLAlchemy** 3.1.1 - ORM
+- **Flask-JWT-Extended** 4.6.0 - JWT authentication
+- **Flask-Bcrypt** 1.0.1 - Password hashing
+- **Flask-CORS** 4.0.0 - Cross-origin resource sharing
+- **Python-Dotenv** 1.0.1 - Environment variables
+- **ItsDangerous** 2.2.0 - Secure token generation
+
+### Frontend
+- HTML5, CSS3, JavaScript (ES6+)
 
 ### Database & Tools
-- **SQLite**: Lightweight and fast for dev (upgrade to PostgreSQL for production glory).
-- **Git**: Version control that keeps everything in sync.
-- **VS Code**: The editor where magic happens.
+- SQLite (development) / PostgreSQL (production)
+- Git for version control
 
-## 🚀 Installation & Setup (Get This Party Started!)
+## Installation
 
 ### Prerequisites
-- **Python 3.8+**: Because old Python is so last season.
-- **Git**: For cloning and pushing like a pro.
-- **VS Code**: Optional but recommended for the full experience.
+- Python 3.8+
+- Git
 
-### 1. Clone the Repo (Bring It Home)
-```bash
-git clone https://github.com/SriDeekshith24/Myrepo.git
-cd Myrepo
+### Setup Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/SriDeekshith24/Myrepo.git
+   cd Myrepo
+   ```
+
+2. **Backend Setup**
+   ```bash
+   cd backend
+   python -m venv venv
+   # Activate virtual environment
+   # Windows:
+   venv\Scripts\activate
+   # Mac/Linux:
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+3. **Environment Configuration**
+   Create a `.env` file in the `backend/` directory:
+   ```env
+   SECRET_KEY=your-secret-key-here
+   JWT_SECRET_KEY=your-jwt-secret-key-here
+   ```
+
+4. **Run the Application**
+   ```bash
+   python app.py
+   ```
+   The backend server will start at `http://127.0.0.1:5000`
+
+5. **Frontend Access**
+   Open `sky/admin.html` in your browser to access the frontend interface.
+
+## Usage
+
+1. **Signup**: Create a new admin account
+2. **Login**: Authenticate and receive a JWT token
+3. **Manage Opportunities**: Create, view, edit, and delete opportunities
+4. **Password Reset**: Use forgot password functionality for account recovery
+
+## API Documentation
+
+### Authentication Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/signup` | Register new user |
+| POST | `/api/auth/login` | User login with JWT |
+| POST | `/api/auth/forgot-password` | Request password reset |
+| POST | `/api/auth/reset-password/<token>` | Reset password with token |
+
+### Opportunity Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/opportunities` | Get all user opportunities |
+| POST | `/api/opportunities` | Create new opportunity |
+| GET | `/api/opportunities/<id>` | Get specific opportunity |
+| PUT | `/api/opportunities/<id>` | Update opportunity |
+| DELETE | `/api/opportunities/<id>` | Delete opportunity |
+
+**Authentication**: Protected endpoints require `Authorization: Bearer <token>` header.
+
+## Project Structure
+
+```
+Myrepo/
+├── README.md
+├── backend/
+│   ├── app.py                 # Main Flask application
+│   ├── config.py              # Configuration settings
+│   ├── extensions.py          # Flask extensions
+│   ├── requirements.txt       # Python dependencies
+│   ├── .env                   # Environment variables
+│   ├── instance/
+│   │   └── database.db        # SQLite database
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── user.py            # User model
+│   │   └── opportunity.py     # Opportunity model
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── auth_routes.py     # Authentication endpoints
+│   │   └── opportunity_routes.py # Opportunity endpoints
+│   └── utils/
+│       ├── __init__.py
+│       ├── validators.py      # Input validation
+│       └── token_helper.py    # Token utilities
+└── sky/
+    ├── admin.html             # Main admin interface
+    ├── admin.css              # Styles
+    └── admin.js               # Frontend logic
 ```
 
-### 2. Backend Setup (Flask Fiesta)
-Navigate to the backend directory:
-```bash
-cd backend
-```
+## Contributing
 
-Create a virtual environment (because isolation is key!):
-```bash
-python -m venv venv
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Activate it:
-- **Windows**:
-  ```bash
-  venv\Scripts\activate
-  ```
-- **Mac/Linux**:
-  ```bash
-  source venv/bin/activate
-  ```
+## License
 
-Install dependencies (the good stuff):
-```bash
-pip install -r requirements.txt
-```
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Set up environment variables (create a `.env` file):
-```env
-SECRET_KEY=your-super-secret-key-here
-JWT_SECRET_KEY=your-jwt-secret-key-here
-```
+## Contact
 
-Run the database migrations (create tables like magic):
-```bash
-python app.py
-```
-The app will auto-create the database on first run. Boom! 🎉
-
-### 3. Frontend Setup (UI Unleashed)
-The frontend is in the `sky/` directory. No extra setup needed—just open `admin.html` in your browser or serve it via a static server.
-
-### 4. Run the App (Launch Sequence Initiated!)
-Start the backend server:
-```bash
-python app.py
-```
-Server runs at: `http://127.0.0.1:5000`
-
-Open `sky/admin.html` in your browser and connect to the API at `http://localhost:5000/api`.
-
-## 📡 API Endpoints (The Backend Beast Mode)
-
-### Authentication APIs (Secure Your Throne)
-| Method | Endpoint | Description | Crazy Factor |
-|--------|----------|-------------|--------------|
-| POST | `/api/auth/signup` | Register a new admin | Validates emails, hashes passwords, no duplicates! |
-| POST | `/api/auth/login` | Login with JWT | Remember me option for lazy admins. |
-| POST | `/api/auth/forgot-password` | Request password reset | Generates secure tokens (check console for link). |
-| POST | `/api/auth/reset-password/<token>` | Reset password | Token expires in 1 hour—time-sensitive drama! |
-
-### Opportunity APIs (CRUD Like a Champion)
-| Method | Endpoint | Description | Crazy Factor |
-|--------|----------|-------------|--------------|
-| GET | `/api/opportunities` | Fetch all user opportunities | User-specific, JWT-protected. |
-| POST | `/api/opportunities` | Create a new opportunity | Validates all fields, auto-assigns user. |
-| GET | `/api/opportunities/<id>` | Get single opportunity | Ownership check included. |
-| PUT | `/api/opportunities/<id>` | Update opportunity | Full edit power. |
-| DELETE | `/api/opportunities/<id>` | Delete opportunity | Cascades deletes—clean slate! |
-
-All endpoints require `Authorization: Bearer <token>` header for protected routes.
-
-## 🎯 Features (The Wow Factor)
-
-### Backend Highlights (What I Built)
-- **User Model**: Full user management with email uniqueness, password hashing, and opportunity relationships.
-- **Opportunity Model**: Comprehensive fields for name, duration, dates, descriptions, skills, categories, and more.
-- **Auth Routes**: Signup with validation, login with JWT, forgot/reset with secure tokens.
-- **Opportunity Routes**: Full CRUD with user isolation—no peeking at others' data!
-- **Utils**: Email validation, password strength checks, and token helpers.
-- **Config**: Environment-based secrets, database URI, JWT settings.
-- **Extensions**: Shared Bcrypt and JWT instances for clean code.
-- **Database**: Auto-creation of tables, relationships, and migrations ready.
-
-### Frontend (Unchanged but Awesome)
-- Admin dashboard for managing opportunities.
-- Forms for signup, login, forgot password.
-- Dynamic cards for opportunities (create, edit, delete).
-- API integration with fetch requests and JWT handling.
-
-## 🧪 Testing the Madness
-1. Signup an admin.
-2. Login and grab your JWT token.
-3. Create opportunities via the API or UI.
-4. Edit, view, and delete them.
-5. Test forgot password (check console for reset link).
-6. Reset password and login again.
-
-## 🚢 Production Deployment (Take It Global!)
-- Switch to PostgreSQL: Update `config.py` with a production URI.
-- Add Flask-Migrate for schema changes.
-- Deploy on Render, Railway, or AWS.
-- Enable HTTPS, rate limiting, and logging.
-- Add email service for real password resets.
-
-## 🤝 Contributing (Join the Fun!)
-1. Fork the repo.
-2. Create a feature branch: `git checkout -b feature/amazing-idea`.
-3. Commit changes: `git commit -m "Add amazing feature"`.
-4. Push: `git push origin feature/amazing-idea`.
-5. Open a PR—let's make this even crazier!
-
-## 📄 License
-This project is licensed under the MIT License—free to use, modify, and share. Just don't blame us if it blows your mind! 😎
-
-## 📞 Contact
 - **Author**: Sai Deekshith
 - **Email**: srideekshith@gmail.com
 - **GitHub**: [SriDeekshith24](https://github.com/SriDeekshith24)
-
----
-
-**Disclaimer**: This is a full-stack assessment project. Use at your own risk—it's insanely good, but we're not responsible for any mind-blowing experiences! 🚀🔥
-
----
-
-## 🚀 Getting Started
-
-1. **Clone the provided repository**
-   ```bash
-   git clone https://github.com/Neerajvs32/Test1.git
-   ```
-
-2. **Create your own GitHub repository**
-   - Push the cloned project to your own GitHub account.
-   - Share your repository link after completing the task.
-
-3. **Development Requirement**
-   - Both Frontend and Backend must run together.
-   - The UI must remain exactly the same.
-   - ❌ Do NOT modify frontend design or components.
-   - ✅ Build the backend required for the existing UI functionality.
-
----
-
-## 🏢 Project Overview
-
-This project is part of the **CertifyMe Full Stack Intern Assessment**. The repository already contains a complete Admin UI. Your responsibility is to **build the backend and connect it with the existing frontend**.
-
-### Objectives
-- Build backend APIs using Flask
-- Connect frontend with backend
-- Store and retrieve data from database
-- Make the application fully functional
 
 ### 🔗 Original Repository
 [https://github.com/Neerajvs32/Test1](https://github.com/Neerajvs32/Test1)
